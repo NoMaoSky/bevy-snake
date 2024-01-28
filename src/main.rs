@@ -9,12 +9,13 @@ mod component;
 
 const BOX_SIZE: Vec2 = Vec2::new(50., 50.);
 const BOX_RANGE: IVec2 = IVec2::new(-5, 5);
+const WINDOW_SIZE: f32 = 550.;
 
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins.set(WindowPlugin {
             primary_window: Some(Window {
-                resolution: WindowResolution::new(550., 550.),
+                resolution: WindowResolution::new(WINDOW_SIZE, WINDOW_SIZE),
                 ..default()
             }),
             ..default()
@@ -56,7 +57,12 @@ fn draw_snake_system(snake_query: Query<&Snake>, mut gizmos: Gizmos) {
 
         snake.body.spawn(spawn_body_func);
 
-        gizmos.circle_2d(Vec2::ZERO, 1., Color::BLUE);
+        gizmos.rect_2d(
+            Vec2::ZERO,
+            0.,
+            Vec2::new(WINDOW_SIZE, WINDOW_SIZE),
+            Color::BLUE,
+        );
     }
 }
 
